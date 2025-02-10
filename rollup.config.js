@@ -2,39 +2,33 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import babel from "@rollup/plugin-babel";
 import terser from "@rollup/plugin-terser";
-import typescript from "@rollup/plugin-typescript";
 
 export default {
-  input: "src/index.ts",
+  input: "src/index.js",
   output: [
     {
       file: "dist/index.cjs.js",
       format: "cjs",
-      exports: "auto", // Permite export default sin errores
+      exports: "auto",
     },
     {
       file: "dist/index.esm.js",
       format: "esm",
     },
   ],
-  external: ["react", "react-dom"], // Evita que React se empaquete con la librería
+  external: ["react", "react-dom"],
   plugins: [
     resolve({
-      extensions: [".js", ".jsx", ".ts", ".tsx"],
-      browser: true, // Asegura compatibilidad con frontend
+      extensions: [".js", ".jsx"],
+      browser: true,
     }),
     commonjs(),
-    typescript({
-      tsconfig: "./tsconfig.json",
-      declaration: true, // Genera archivos .d.ts
-      declarationDir: "dist",
-    }),
     babel({
       babelHelpers: "bundled",
       presets: ["@babel/preset-env", "@babel/preset-react"],
-      extensions: [".js", ".jsx", ".ts", ".tsx"],
-      exclude: "node_modules/**", // No transforma dependencias externas
+      extensions: [".js", ".jsx"],
+      exclude: "node_modules/**",
     }),
-    terser(), // Minifica el código para reducir el tamaño final
+    terser(),
   ],
 };

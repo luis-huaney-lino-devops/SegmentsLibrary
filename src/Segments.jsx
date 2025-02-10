@@ -1,60 +1,36 @@
 import React, { useEffect, useRef } from "react";
 import SegmentDisplay from "./GeneradorCanvas";
-/*
-Desarrollado por Luis Alberto Huaney Lino 
-*/
-interface SegmentsProps {
-  id?: string;
-  pattern?: string;
-  textopredefinido?: string;
-  width?: number;
-  height?: number;
-  colorOn?: string;
-  colorOff?: string;
-  cantidadSegmentos?: 7 | 14 | 16;
-  altoDisplay?: number;
-  anchoDisplay?: number;
-  distanciaEntreDigitos?: number;
-  anchoSegmento?: number;
-  distanciaSegmento?: number;
-  tipoBorde?: 0 | 1 | 2 | 3;
-  anguloDisplay?: number;
-}
 
-const Segments: React.FC<SegmentsProps> = ({
+const Segments = ({
   id = "1",
-  pattern = "#####",
-  textopredefinido = "TUTEC",
+  pattern = "#####", // Patrón por defecto
+  textopredefinido = "TUTEC", // Texto por defecto
   width = 300,
   height = 180,
   colorOn = "#4d91cd",
   colorOff = "#53595e45",
-  cantidadSegmentos = 14,
+  cantidadSegmentos = 14, // Solo puede ser 7, 14 o 16
   altoDisplay = 23.5,
   anchoDisplay = 14.5,
   distanciaEntreDigitos = 2.5,
   anchoSegmento = 3,
   distanciaSegmento = 0.3,
-  tipoBorde = 3,
-  anguloDisplay = 6
+  tipoBorde = 3, // Tipo de borde permitido: 0, 1, 2, 3
+  anguloDisplay = 6 // Ángulo de inclinación del display
 }) => {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const displayInstanceRef = useRef<InstanceType<typeof SegmentDisplay> | null>(null);
+  const canvasRef = useRef(null);
+  const displayInstanceRef = useRef(null);
 
   useEffect(() => {
     if (!canvasRef.current) return;
 
     // Validar que cantidadSegmentos solo acepte 7, 14 o 16
-    const segmentosValidos = [7, 14, 16] as const;
-    const segmentosFinal = segmentosValidos.includes(cantidadSegmentos as 7 | 14 | 16) 
-      ? cantidadSegmentos 
-      : 7;
+    const segmentosValidos = [7, 14, 16];
+    const segmentosFinal = segmentosValidos.includes(cantidadSegmentos) ? cantidadSegmentos : 7;
 
     // Validar que tipoBorde solo acepte 0, 1, 2 o 3
-    const bordesValidos = [0, 1, 2, 3] as const;
-    const bordeFinal = bordesValidos.includes(tipoBorde as 0 | 1 | 2 | 3) 
-      ? tipoBorde 
-      : 3;
+    const bordesValidos = [0, 1, 2, 3];
+    const bordeFinal = bordesValidos.includes(tipoBorde) ? tipoBorde : 3;
 
     // Create new instance only if it doesn't exist
     if (!displayInstanceRef.current) {
