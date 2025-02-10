@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import SegmentDisplay from "./GeneradorCanvas";
-
+/*
+Desarrollado por Luis Alberto Huaney Lino 
+*/
 interface SegmentsProps {
   id?: string;
   pattern?: string;

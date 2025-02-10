@@ -1,4 +1,8 @@
 # Documentación del Componente Segments
+
+<a href="https://github.com/luis-huaney-lino-devops/SegmentsLibrary" >Link del repositorio</a>
+<a href="https://www.npmjs.com/package/segmentslibrary?activeTab=readme" >Link de la libreria</a>
+
 ## Licencia
 MIT License
 

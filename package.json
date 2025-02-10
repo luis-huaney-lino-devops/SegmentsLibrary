@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "segmentslibrary",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "A React library for segment displays",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
