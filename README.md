@@ -4,7 +4,10 @@
 </br>
 <a href="https://www.npmjs.com/package/segmentslibrary?activeTab=readme" >Link de la libreria</a>
 </br>
-<a href="https://www.npmjs.com/package/segmentslibrary?activeTab=readme" > Documentación</a>
+<a href="https://www.npmjs.com/package/segmentslibrary?activeTab=readme" > Documentación en npm </a>
+
+<a href="https://documentacionsegmentslibrary.vercel.app/" > Documentación web </a>
+
 </br>
 ## Licencia
 MIT License
@@ -30,9 +33,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 ## Descripción
+
 El componente `Segments` permite mostrar un display de segmentos al estilo de relojes digitales o pantallas de calculadoras. Es altamente configurable y admite distintos tamaños, colores y estilos de segmentos.
 
 ## Instalación
+
 Para usar este componente en tu proyecto, primero instala la librería:
 
 ```sh
@@ -46,39 +51,41 @@ import Segments from "segmentslibrary";
 ```
 
 ## Props del Componente
-| Propiedad              | Tipo    | Descripción |
-|------------------------|---------|-------------|
-| `id`                  | String  | Identificador único del display (por defecto "1"). |
-| `pattern`             | String  | Patrón del display (ej. "#####", "##:##:##"). |
-| `textopredefinido`    | String  | Texto inicial que se mostrará en el display. |
-| `width`               | Number  | Ancho del canvas (px). |
-| `height`              | Number  | Alto del canvas (px). |
-| `colorOn`             | String  | Color de los segmentos activos. |
-| `colorOff`            | String  | Color de los segmentos inactivos. |
-| `cantidadSegmentos`   | Number  | Cantidad de segmentos (7, 14 o 16). |
-| `altoDisplay`         | Number  | Altura de los dígitos. |
-| `anchoDisplay`        | Number  | Ancho de los dígitos. |
-| `distanciaEntreDigitos` | Number | Espacio entre los dígitos. |
-| `anchoSegmento`       | Number  | Ancho de los segmentos. |
-| `distanciaSegmento`   | Number  | Distancia entre los segmentos. |
-| `tipoBorde`          | Number  | Tipo de borde (0, 1, 2 o 3). |
-| `anguloDisplay`       | Number  | Ángulo de inclinación del display. |
+
+| Propiedad               | Tipo   | Descripción                                        |
+| ----------------------- | ------ | -------------------------------------------------- |
+| `id`                    | String | Identificador único del display (por defecto "1"). |
+| `pattern`               | String | Patrón del display (ej. "#####", "##:##:##").      |
+| `textopredefinido`      | String | Texto inicial que se mostrará en el display.       |
+| `width`                 | Number | Ancho del canvas (px).                             |
+| `height`                | Number | Alto del canvas (px).                              |
+| `colorOn`               | String | Color de los segmentos activos.                    |
+| `colorOff`              | String | Color de los segmentos inactivos.                  |
+| `cantidadSegmentos`     | Number | Cantidad de segmentos (7, 14 o 16).                |
+| `altoDisplay`           | Number | Altura de los dígitos.                             |
+| `anchoDisplay`          | Number | Ancho de los dígitos.                              |
+| `distanciaEntreDigitos` | Number | Espacio entre los dígitos.                         |
+| `anchoSegmento`         | Number | Ancho de los segmentos.                            |
+| `distanciaSegmento`     | Number | Distancia entre los segmentos.                     |
+| `tipoBorde`             | Number | Tipo de borde (0, 1, 2 o 3).                       |
+| `anguloDisplay`         | Number | Ángulo de inclinación del display.                 |
 
 ## Ejemplo: Crear un Reloj Digital
+
 Para mostrar un reloj en tiempo real con este componente:
 
 ```jsx
-import React, { useState, useEffect } from 'react';
-import Segments from 'segmentslibrary';  // Ajusta la ruta según tu estructura de archivos
+import React, { useState, useEffect } from "react";
+import Segments from "segmentslibrary"; // Ajusta la ruta según tu estructura de archivos
 
 const DigitalClock = () => {
-  const [time, setTime] = useState('');
+  const [time, setTime] = useState("");
 
   useEffect(() => {
     const formatTime = (date) => {
-      const hours = date.getHours().toString().padStart(2, '0');
-      const minutes = date.getMinutes().toString().padStart(2, '0');
-      const seconds = date.getSeconds().toString().padStart(2, '0');
+      const hours = date.getHours().toString().padStart(2, "0");
+      const minutes = date.getMinutes().toString().padStart(2, "0");
+      const seconds = date.getSeconds().toString().padStart(2, "0");
       return `${hours}:${minutes}:${seconds}`;
     };
 
@@ -116,19 +123,20 @@ export default DigitalClock;
 ```
 
 ## Ejemplo: Animación de Palabra Letra por Letra
+
 Para animar una palabra letra por letra con parpadeo:
 
 ```jsx
-import React, { useState, useEffect } from 'react'; 
-import Segments from 'segmentslibrary';  // Ajusta la ruta según tu estructura de archivos
+import React, { useState, useEffect } from "react";
+import Segments from "segmentslibrary"; // Ajusta la ruta según tu estructura de archivos
 
 const AnimatedSegments = ({
   text = "TUTEC",
   animationSpeed = 500,
   blinkCount = 2,
-  id = "animated"
+  id = "animated",
 }) => {
-  const [displayText, setDisplayText] = useState('');
+  const [displayText, setDisplayText] = useState("");
   const [index, setIndex] = useState(0);
   const [blinkPhase, setBlinkPhase] = useState(0);
 
@@ -136,14 +144,14 @@ const AnimatedSegments = ({
     const animate = () => {
       if (index <= text.length) {
         setDisplayText(text.substring(0, index));
-        setIndex(prev => prev + 1);
+        setIndex((prev) => prev + 1);
       } else if (blinkPhase < blinkCount * 2) {
         if (blinkPhase % 2 === 0) {
-          setDisplayText('     ');
+          setDisplayText("     ");
         } else {
           setDisplayText(text);
         }
-        setBlinkPhase(prev => prev + 1);
+        setBlinkPhase((prev) => prev + 1);
       } else {
         setIndex(0);
         setBlinkPhase(0);
@@ -179,13 +187,11 @@ export default AnimatedSegments;
 ```
 
 ## Ejemplo de Manejo de Errores
+
 Si se proporciona un valor incorrecto en `cantidadSegmentos`, el componente lo corregirá automáticamente a 7, 14 o 16.
 
 ```jsx
-<Segments cantidadSegmentos={10} />  // Se corregirá a 7
+<Segments cantidadSegmentos={10} /> // Se corregirá a 7
 ```
 
-
-
 Este componente es ideal para paneles de control, relojes digitales, y más. 🚀
-
